@@ -12,17 +12,15 @@ class SecondViewController: UIViewController, UITableViewDataSource, UITableView
     
     var movietitles = [String]()
     var moviedescriptions = [String: String]()
-    var checkTitle = String()
     
     let storage = UserDefaults.standard
     
     @IBOutlet weak var tableviewWatchlist: UITableView!
     @IBOutlet weak var search: UISearchBar!
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        checkTitle = movietitles[indexPath.row]
-        self.performSegue(withIdentifier: "showMovie", sender: nil)
-    }
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        self.performSegue(withIdentifier: "showMovie", sender: nil)
+//    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,6 +55,7 @@ class SecondViewController: UIViewController, UITableViewDataSource, UITableView
             self.moviedescriptions[json["Title"] as! String] = json["Plot"] as? String
         }
         task.resume()
+        tableviewWatchlist.reloadData()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -81,14 +80,12 @@ class SecondViewController: UIViewController, UITableViewDataSource, UITableView
             requestHTTPS(title: search.text!)
     }
 
-        
-    // Pass data to the Table View
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let thirdVC = segue.destination as? ThirdViewController {
-           thirdVC.data = self.moviedescriptions[checkTitle]!
-        }
+        let thirdVC = segue.destination as! ThirdViewController
+        thirdVC.data = self.movietitles[self.tableviewWatchlist.indexPathForSelectedRow!.row]
+        thirdVC.datatitle = self.moviedescriptions[self.movietitles[self.tableviewWatchlist.indexPathForSelectedRow!.row]]!
     }
-    
+        
 }
 
 

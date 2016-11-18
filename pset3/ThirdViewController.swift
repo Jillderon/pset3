@@ -11,11 +11,16 @@ import UIKit
 class ThirdViewController: UIViewController {
     
     var data = String()
+    var datatitle = String()
 
+    @IBOutlet weak var displayDescription: UITextView!
+    @IBOutlet weak var displayTitle: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        displayTitle.text = data
+        displayDescription.text = datatitle
     }
 
     override func didReceiveMemoryWarning() {

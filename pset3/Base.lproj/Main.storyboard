@@ -216,6 +216,10 @@
                             <constraint firstItem="aw6-dx-670" firstAttribute="top" secondItem="sI2-tI-0zH" secondAttribute="bottom" id="xfA-3h-McG"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="displayDescription" destination="lhy-Gr-1Bc" id="vzc-JZ-FaI"/>
+                        <outlet property="displayTitle" destination="aw6-dx-670" id="yCW-jU-ZsN"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W2B-Pj-i33" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
