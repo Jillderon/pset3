@@ -10,27 +10,15 @@ import UIKit
 
 class SecondViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
+    // make an array and dictionary with the movie titles and moviedescriptions added to watchlist
     var movietitles = [String]()
     var moviedescriptions = [String: String]()
     
-    let storage = UserDefaults.standard
+    // remembers the movies in the watchlist after closing app
+    let defaults = UserDefaults.standard
     
     @IBOutlet weak var tableviewWatchlist: UITableView!
     @IBOutlet weak var search: UISearchBar!
-    
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        self.performSegue(withIdentifier: "showMovie", sender: nil)
-//    }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
     // Make a HTTPS request. Cited from: Code Different (http://stackoverflow.com/questions/38292793/http-requests-in-swift-3)
     func requestHTTPS(title: String){
@@ -53,15 +41,31 @@ class SecondViewController: UIViewController, UITableViewDataSource, UITableView
             // add movies to array
             self.movietitles.append(json["Title"] as! String)
             self.moviedescriptions[json["Title"] as! String] = json["Plot"] as? String
+            
         }
         task.resume()
+        // Reload view after adding movie
         tableviewWatchlist.reloadData()
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Do any additional setup after loading the view.
+        
+        defaults.set(movietitles, forKey: "Title")
+        defaults.set(moviedescriptions, forKey: "Plot")
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return movietitles.count
     }
     
+    // Reuse the cells in table view
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CustomMovieCell
         cell.nameMovie.text = movietitles[indexPath.row]
@@ -76,10 +80,12 @@ class SecondViewController: UIViewController, UITableViewDataSource, UITableView
         
     }
     
+    // request information after add is clicked
     @IBAction func addToWatchlist(_ sender: Any) {
             requestHTTPS(title: search.text!)
     }
 
+    // send information to third view controller after the movie is clicked
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let thirdVC = segue.destination as! ThirdViewController
         thirdVC.data = self.movietitles[self.tableviewWatchlist.indexPathForSelectedRow!.row]
@@ -87,16 +93,5 @@ class SecondViewController: UIViewController, UITableViewDataSource, UITableView
     }
         
 }
-
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 

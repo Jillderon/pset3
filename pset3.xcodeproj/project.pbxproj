@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		A05C5BFD1DDB231D00958F87 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05C5BFC1DDB231D00958F87 /* SecondViewController.swift */; };
 		A05C5BFF1DDB2AE400958F87 /* ThirdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05C5BFE1DDB2AE400958F87 /* ThirdViewController.swift */; };
+		A071D5D01DDFA72900CDE575 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = A071D5CF1DDFA72900CDE575 /* README.md */; };
 		A0B12A941DDB971B0041798C /* CustomMovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B12A931DDB971B0041798C /* CustomMovieCell.swift */; };
 		A0B5D0BB1DD87D8F0027E5A7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B5D0BA1DD87D8F0027E5A7 /* AppDelegate.swift */; };
 		A0B5D0BD1DD87D8F0027E5A7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B5D0BC1DD87D8F0027E5A7 /* ViewController.swift */; };
@@ -20,6 +21,7 @@
 /* Begin PBXFileReference section */
 		A05C5BFC1DDB231D00958F87 /* SecondViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		A05C5BFE1DDB2AE400958F87 /* ThirdViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThirdViewController.swift; sourceTree = "<group>"; };
+		A071D5CF1DDFA72900CDE575 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		A0B12A931DDB971B0041798C /* CustomMovieCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomMovieCell.swift; path = ../CustomMovieCell.swift; sourceTree = "<group>"; };
 		A0B5D0B71DD87D8F0027E5A7 /* pset3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = pset3.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0B5D0BA1DD87D8F0027E5A7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -65,6 +67,7 @@
 				A0B5D0BC1DD87D8F0027E5A7 /* ViewController.swift */,
 				A05C5BFC1DDB231D00958F87 /* SecondViewController.swift */,
 				A05C5BFE1DDB2AE400958F87 /* ThirdViewController.swift */,
+				A071D5CF1DDFA72900CDE575 /* README.md */,
 				A0B5D0BE1DD87D8F0027E5A7 /* Main.storyboard */,
 				A0B5D0C11DD87D8F0027E5A7 /* Assets.xcassets */,
 				A0B5D0C31DD87D8F0027E5A7 /* LaunchScreen.storyboard */,
@@ -146,6 +149,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A071D5D01DDFA72900CDE575 /* README.md in Sources */,
 				A05C5BFD1DDB231D00958F87 /* SecondViewController.swift in Sources */,
 				A0B5D0BD1DD87D8F0027E5A7 /* ViewController.swift in Sources */,
 				A05C5BFF1DDB2AE400958F87 /* ThirdViewController.swift in Sources */,
