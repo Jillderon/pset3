@@ -8,18 +8,27 @@
 
 import UIKit
 
-class SecondViewController: UIViewController {
+class SecondViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    
+    var movietitles = [String]()
+    var moviedescriptions = [String: String]()
+    var checkTitle = String()
+    
+    let storage = UserDefaults.standard
+    
+    @IBOutlet weak var tableviewWatchlist: UITableView!
     @IBOutlet weak var search: UISearchBar!
-    @IBAction func actionButtonSearch(_ sender: Any) {
-        requestHTTPS(title: search.text!)
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        checkTitle = movietitles[indexPath.row]
+        self.performSegue(withIdentifier: "showMovie", sender: nil)
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -41,23 +50,47 @@ class SecondViewController: UIViewController {
                 return
             }
             
-            let json = try! JSONSerialization.jsonObject(with: data, options: [])
+            let json = try! JSONSerialization.jsonObject(with: data, options: []) as! NSDictionary
+            
+            // add movies to array
+            self.movietitles.append(json["Title"] as! String)
+            self.moviedescriptions[json["Title"] as! String] = json["Plot"] as? String
         }
-        
         task.resume()
     }
     
-    // Parse JSON to get dictionary. Cited from Eric Aya: http://stackoverflow.com/questions/30480672/how-to-convert-a-json-string-to-a-dictionary
-    func convertStringToDictionary(text: String) -> [String:AnyObject]? {
-        if let data = text.data(using: String.Encoding.utf8) {
-            do {
-                return try JSONSerialization.jsonObject(with: data, options: []) as? [String:AnyObject]
-            } catch let error as NSError {
-                print(error)
-            }
-        }
-        return nil
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return movietitles.count
     }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CustomMovieCell
+        cell.nameMovie.text = movietitles[indexPath.row]
+        
+        if let description = moviedescriptions[movietitles[indexPath.row]] {
+            cell.descriptionMovie.text = description
+        } else {
+            cell.descriptionMovie.text = ""
+        }
+        
+        return cell
+        
+    }
+    
+    @IBAction func addToWatchlist(_ sender: Any) {
+            requestHTTPS(title: search.text!)
+    }
+
+        
+    // Pass data to the Table View
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let thirdVC = segue.destination as? ThirdViewController {
+           thirdVC.data = self.moviedescriptions[checkTitle]!
+        }
+    }
+    
+}
+
 
     /*
     // MARK: - Navigation
@@ -69,4 +102,4 @@ class SecondViewController: UIViewController {
     }
     */
 
-}
+

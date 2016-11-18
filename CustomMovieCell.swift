@@ -9,10 +9,10 @@
 import UIKit
 
 class CustomMovieCell: UITableViewCell {
-
+    
     @IBOutlet weak var descriptionMovie: UILabel!
     @IBOutlet weak var nameMovie: UILabel!
-    @IBOutlet weak var poster: UIImageView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
